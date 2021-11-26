@@ -14,11 +14,11 @@ public class AgeRule {
     AnswerType interpret(PhenoAge age) {
         int c = this.thresholdAge.compareTo(age);
         if (youngerThanAbnormal) {
-            if (c<=0) return  AnswerType.OBSERVED;
-            else return AnswerType.EXCLUDED;
-        } else {
             if (c<=0) return  AnswerType.EXCLUDED;
             else return AnswerType.OBSERVED;
+        } else {
+            if (c<=0) return  AnswerType.OBSERVED;
+            else return AnswerType.EXCLUDED;
         }
     }
 
@@ -33,16 +33,10 @@ public class AgeRule {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(thresholdAge.getYears()).append(" Y").append(thresholdAge.getMonths()).append(" M");
-        if (thresholdAge.getDays()!=0) {
-            sb.append(thresholdAge.getDays()).append(" D");
-        }
-        String ageString = sb.toString();
         if (youngerThanAbnormal) {
-            return "younger than " + ageString;
+            return "younger than " + thresholdAge;
         } else {
-            return "older than " + ageString;
+            return "older than " + thresholdAge;
         }
     }
 

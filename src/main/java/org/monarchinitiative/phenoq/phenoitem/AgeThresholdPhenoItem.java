@@ -58,7 +58,7 @@ public class AgeThresholdPhenoItem implements PhenoItem {
 
     @Override
     public String toString() {
-        return String.format("%s (%s): \"%s\" - Threshold %s/Observed TODO", term().getName(), term().getId().getValue(),
-                answer(), this.ageRule);
+        return String.format("%s (%s): \"%s\" - Threshold %s/Observed %s", term().getName(), term().getId().getValue(),
+                answer(), this.ageRule, this.age);
     }
 }

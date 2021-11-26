@@ -47,4 +47,14 @@ public class PhenoAge implements Comparable<PhenoAge> {
     public boolean initialized() {
         return getYears() != 0 || getMonths() != 0 || getDays() != 0;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getYears()).append(" Y").append(getMonths()).append(" M");
+        if (getDays() != 0) {
+            sb.append(getDays()).append(" D");
+        }
+        return sb.toString();
+    }
 }

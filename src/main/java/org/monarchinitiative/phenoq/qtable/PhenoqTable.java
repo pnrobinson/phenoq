@@ -7,6 +7,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 import org.monarchinitiative.phenol.ontology.data.Term;
 import org.monarchinitiative.phenoq.phenoitem.AgeRule;
@@ -26,9 +27,15 @@ public class PhenoqTable extends TableView<Qphenorow> {
     Logger LOGGER = LoggerFactory.getLogger(PhenoqTable.class);
     private final ObservableList<Qphenorow> phenolist = FXCollections.observableArrayList();
 
-    private final String CSS_STYLE = """
+    /**
+     * .table-row-cell refers to the row height
+     */
+    public static final String CSS_STYLE = """
             .table-view .corner {
                 -fx-background-color: transparent;
+            }
+            .table-row-cell {
+                -fx-cell-size: 50px;
             }
             """;
 
@@ -36,6 +43,7 @@ public class PhenoqTable extends TableView<Qphenorow> {
 
     public PhenoqTable(List<Qphenorow> items) {
         this.setEditable(true);
+        setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         setStyle(CSS_STYLE);
         TableColumn<Qphenorow, String> titleCol = titleColumn();
         TableColumn<Qphenorow, TermSelectionButton> segmentedCol = segmentedButtonColumn();
@@ -163,7 +171,7 @@ public class PhenoqTable extends TableView<Qphenorow> {
         });
         ageBoxCol.setEditable(false);
         ageBoxCol.setSortable(false);
-        ageBoxCol.setMinWidth(250);
+        ageBoxCol.setMinWidth(300);
         return ageBoxCol;
     }
 
