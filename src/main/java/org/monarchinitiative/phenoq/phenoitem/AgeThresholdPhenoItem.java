@@ -1,0 +1,64 @@
+package org.monarchinitiative.phenoq.phenoitem;
+
+import org.monarchinitiative.phenol.ontology.data.Term;
+
+import java.util.Optional;
+
+public class AgeThresholdPhenoItem implements PhenoItem {
+
+    private final Term hpoTerm;
+    private AnswerType phenoanswer;
+    private final AgeRule ageRule;
+    private PhenoAge age;
+    private final String question;
+
+    public AgeThresholdPhenoItem(Term term, AgeRule ageRule, String qu) {
+        this.hpoTerm = term;
+        this.ageRule = ageRule;
+        this.phenoanswer = AnswerType.UNKNOWN;
+        this.question = qu;
+    }
+
+    @Override
+    public String termLabel() {
+        return hpoTerm.getName();
+    }
+
+    @Override
+    public Term term() {
+        return this.hpoTerm;
+    }
+
+    @Override
+    public Optional<AgeRule> ageRuleOpt() {
+        return Optional.of(ageRule);
+    }
+
+    @Override
+    public AnswerType answer() {
+        return this.phenoanswer;
+    }
+
+    @Override
+    public String question(){ return this.question; };
+
+    @Override
+    public void updateAnswer(AnswerType answer) {
+        this.phenoanswer = answer;
+    }
+
+    @Override
+    public void updateAge(PhenoAge age) {
+        this.age = age;
+        if (age.initialized()) {
+            this.phenoanswer = ageRule.interpret(age);
+        }
+    }
+
+
+    @Override
+    public String toString() {
+        return String.format("%s (%s): \"%s\" - Threshold %s/Observed TODO", term().getName(), term().getId().getValue(),
+                answer(), this.ageRule);
+    }
+}
