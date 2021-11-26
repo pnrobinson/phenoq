@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 import org.monarchinitiative.phenol.ontology.data.Term;
 import org.monarchinitiative.phenoq.phenoitem.AgeRule;
@@ -82,7 +83,10 @@ public class PhenoqTable extends TableView<Qphenorow> {
                             String msg = String.format("Question for %s (%s)", term.getName(), term.getId().getValue());
                             tooltip.setText(msg);
                             setTooltip(tooltip);
-                            setText(item);
+                            Text text = new Text(item);
+                            text.setStyle("-fx-text-alignment:justify;");
+                            text.wrappingWidthProperty().bind(getTableColumn().widthProperty().subtract(25));
+                            setGraphic(text);
                         }
                     }
                 };
@@ -142,7 +146,10 @@ public class PhenoqTable extends TableView<Qphenorow> {
                                 tooltip.setText(msg);
                                 setTooltip(tooltip);
                             }
-                            setText(item);
+                            Text text = new Text(item);
+                            text.setStyle("-fx-text-alignment:justify;");
+                            text.wrappingWidthProperty().bind(getTableColumn().widthProperty().subtract(35));
+                            setGraphic(text);
                         }
                     }
                 };

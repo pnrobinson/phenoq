@@ -14,3 +14,14 @@ The first question type just asks if an HPO term was observed, excluded or wheth
 
 The secod question is intended to be used to assess whether there is delayed or accelerated development and
 the user can optionally enter an age that will trigger the HPO term according to a built-in threshold.
+
+
+Setup
+#####
+
+Adjust the path to the ``hp.obo`` file in the application.properties file.
+```
+spring.application.ui.title=PhenoQ
+application.version=0.0.0.0.1
+hpo.path=/home/peter/data/hpo/hp.obo
+```
