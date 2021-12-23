@@ -40,7 +40,7 @@ public class AgeThresholdPhenoItem implements PhenoItem {
     }
 
     @Override
-    public String question(){ return this.question; };
+    public String question(){ return this.question; }
 
     @Override
     public void updateAnswer(AnswerType answer) {

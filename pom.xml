@@ -12,7 +12,7 @@
 
     <artifactId>phenoq</artifactId>
     <groupId>org.monarchinitiative.phenoq</groupId>
-    <version>0.2.0-SNAPSHOT</version>
+    <version>0.3.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>phenoq</name>
 
@@ -20,12 +20,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>16</java.version>
+        <java.version>17</java.version>
         <javafx.version>17.0.0.1</javafx.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-
-
         <hpotextmining.version>0.2.8</hpotextmining.version>
         <phenol.version>1.6.3</phenol.version>
         <phenopacket.version>1.0.0</phenopacket.version>
@@ -33,6 +31,8 @@
         <jackson.fasterxml.version>2.11.4</jackson.fasterxml.version>
         <slf4j.version>1.7.30</slf4j.version>
         <commons.io>2.8.0</commons.io>
+        <junit.version>5.8.1</junit.version>
+        <junit.platform.version>1.7.0</junit.platform.version>
     </properties>
 
 
@@ -52,7 +52,6 @@
             <artifactId>javafx-weaver-spring-boot-starter</artifactId>
             <version>1.3.0</version>
         </dependency>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
@@ -78,6 +77,12 @@
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

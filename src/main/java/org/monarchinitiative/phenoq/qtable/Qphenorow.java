@@ -1,7 +1,6 @@
 package org.monarchinitiative.phenoq.qtable;
 
 import javafx.beans.property.*;
-import org.checkerframework.checker.units.qual.A;
 import org.monarchinitiative.phenol.ontology.data.Term;
 import org.monarchinitiative.phenoq.phenoitem.AgeRule;
 import org.monarchinitiative.phenoq.phenoitem.AnswerType;
@@ -12,13 +11,9 @@ import java.util.Optional;
 
 public class Qphenorow {
 
-    StringProperty title;
+    private final StringProperty title;
 
-    StringProperty question;
-
-    public TermSelectionButton getTermSelectionButton() {
-        return termSelectionButton;
-    }
+    private final StringProperty question;
 
     TermSelectionButton termSelectionButton;
 
@@ -115,7 +110,7 @@ public class Qphenorow {
     /**
      * Returns the Phenoitem that corresponds to the choice of the user.
      * If this is an AgeRule phenoitem, we apply the rule to decide upon the appropriate call for the HPO term
-     * @return
+     * @return the PhenoItem on which the row is based
      */
     public PhenoItem toPhenoItem() {
         if (ageRuleOpt().isPresent()) {
@@ -130,6 +125,10 @@ public class Qphenorow {
 
     public StringProperty questionProperty() {
         return question;
+    }
+
+    public TermSelectionButton getTermSelectionButton() {
+        return termSelectionButton;
     }
 
     public void setQuestion(String question) {

@@ -11,7 +11,8 @@ import java.util.Optional;
 public interface PhenoItem {
     String termLabel();
     // Additional question, intended for Age-Rule phenoitems
-    default String question(){ return ""; };
+    default String question(){ return ""; }
+
     Term term();
     AnswerType answer();
     default Optional<AgeRule> ageRuleOpt() { return Optional.empty(); }

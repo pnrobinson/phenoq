@@ -7,7 +7,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 import org.monarchinitiative.phenol.ontology.data.Term;
@@ -105,7 +104,7 @@ public class PhenoqTable extends TableView<Qphenorow> {
             TermSelectionButton button = pr.termSelectionButton;
             for (var b : button.getButtons()) {
                 b.setOnAction((e) ->{
-                    pr.updateAnswer();;
+                    pr.updateAnswer();
                 });
             }
             // wrap it so it can be displayed in the TableView
