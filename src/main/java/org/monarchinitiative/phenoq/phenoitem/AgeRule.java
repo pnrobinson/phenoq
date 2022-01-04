@@ -11,10 +11,10 @@ public class AgeRule {
         this.youngerThanAbnormal = younger;
     }
 
-    AnswerType interpret(PhenoAge age) {
+    public AnswerType interpret(PhenoAge age) {
         int c = this.thresholdAge.compareTo(age);
         if (youngerThanAbnormal) {
-            if (c<=0) return  AnswerType.EXCLUDED;
+                if (c<=0) return  AnswerType.EXCLUDED;
             else return AnswerType.OBSERVED;
         } else {
             if (c<=0) return  AnswerType.OBSERVED;

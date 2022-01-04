@@ -6,9 +6,7 @@ import org.monarchinitiative.phenol.io.OntologyLoader;
 import org.monarchinitiative.phenol.ontology.data.Ontology;
 import org.monarchinitiative.phenol.ontology.data.Term;
 import org.monarchinitiative.phenol.ontology.data.TermId;
-import org.monarchinitiative.phenoq.phenoitem.AgeRule;
-import org.monarchinitiative.phenoq.phenoitem.AgeThresholdPhenoItem;
-import org.monarchinitiative.phenoq.phenoitem.SimplePhenoItem;
+import org.monarchinitiative.phenoq.phenoitem.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -78,6 +76,13 @@ public class QuestionParserTest {
         Optional<AgeRule> opt = item.ageRuleOpt();
         assertTrue(opt.isPresent());
         AgeRule ageRule = opt.get();
+        // Age rule is 1y6m, olderthan
+        PhenoAge age17months = new PhenoAge(1,5);
+        PhenoAge age18months = new PhenoAge(1,6);
+        PhenoAge age19months = new PhenoAge(1,7);
+        assertEquals(AnswerType.EXCLUDED, ageRule.interpret(age17months));
+        assertEquals(AnswerType.EXCLUDED, ageRule.interpret(age18months));
+        assertEquals(AnswerType.OBSERVED, ageRule.interpret(age19months));
         //assertEquals(1, ageRule.);
     }
 

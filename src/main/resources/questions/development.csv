@@ -1,0 +1,3 @@
+question.type,hp.id,hp.label,threshold.year,threshold.month,threshold.day,older.younger
+simple,Arachnodactyly,HP:0001166
+age.threshold,Delayed ability to walk,HP:0031936,1,6,,older
