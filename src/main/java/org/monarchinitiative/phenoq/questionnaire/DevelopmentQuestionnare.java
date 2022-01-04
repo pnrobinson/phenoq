@@ -1,15 +1,11 @@
 package org.monarchinitiative.phenoq.questionnaire;
 
-import org.monarchinitiative.phenol.base.PhenolRuntimeException;
-import org.monarchinitiative.phenol.io.OntologyLoader;
 import org.monarchinitiative.phenol.ontology.data.Ontology;
 import org.monarchinitiative.phenoq.except.PhenoqRuntimeException;
 import org.monarchinitiative.phenoq.phenoitem.AgeThresholdPhenoItem;
 import org.monarchinitiative.phenoq.phenoitem.SimplePhenoItem;
-import org.monarchinitiative.phenoq.questions.QuestionParser;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 
@@ -20,7 +16,7 @@ public class DevelopmentQuestionnare {
 
 
     public DevelopmentQuestionnare(Ontology ontology ) {
-        String developmentFilePath = "/questions/development.csv";
+        String developmentFilePath = "/questions/development.txt";
 
         URL url = DevelopmentQuestionnare.class.getResource(developmentFilePath);
         if (url == null) {

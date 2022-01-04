@@ -7,6 +7,7 @@ import org.monarchinitiative.phenol.ontology.data.Ontology;
 import org.monarchinitiative.phenol.ontology.data.Term;
 import org.monarchinitiative.phenol.ontology.data.TermId;
 import org.monarchinitiative.phenoq.phenoitem.*;
+import org.monarchinitiative.phenoq.questionnaire.QuestionParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;

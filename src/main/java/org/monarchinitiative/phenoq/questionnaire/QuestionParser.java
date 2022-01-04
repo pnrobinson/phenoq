@@ -1,4 +1,4 @@
-package org.monarchinitiative.phenoq.questions;
+package org.monarchinitiative.phenoq.questionnaire;
 
 import org.monarchinitiative.phenol.base.PhenolRuntimeException;
 import org.monarchinitiative.phenol.ontology.data.Ontology;
@@ -25,18 +25,24 @@ public class QuestionParser {
     private final List<SimplePhenoItem> simplePhenoItemList;
     private final List<AgeThresholdPhenoItem> ageThresholdPhenoItemList;
 
+    private final static List<String> headerFields = List.of("question.type",
+            "hp.id", "hp.label", "threshold.year", "threshold.month",
+            "threshold.day", "older.younger", "question.text");
+    private final static String header = String.join("\t", headerFields);
+    private final static int N_HEADER_FIELDS = headerFields.size();
+
     public QuestionParser(File questionFile, Ontology ontology) {
         simplePhenoItemList = new ArrayList<>();
         ageThresholdPhenoItemList =  new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(questionFile))) {
             String line = br.readLine();
-            if (! line.startsWith("question.type")) {
+            if (! line.equals(header)) {
                 throw new PhenolRuntimeException("Malformed questions file - did not find header line");
             }
             while ((line = br.readLine()) != null) {
                 System.out.println(line);
-                String [] fields = line.split(",");
+                String [] fields = line.split("\t");
                 String label = fields[1].trim();
                 TermId tid = TermId.of(fields[2].trim());
                 if (! ontology.containsTerm(tid)) {
@@ -54,27 +60,14 @@ public class QuestionParser {
                         simplePhenoItemList.add(item);
                     }
                     case "age.threshold" -> {
-                        if (fields.length != 7) {
+                        if (fields.length != N_HEADER_FIELDS) {
                             throw new PhenolRuntimeException("Malformed age.threshold line with "
                                     + fields.length + " fields. " + line);
                         }
-                        //age.threshold,Delayed ability to walk,HP:0031936,1,6,,older
-                        int y,m,d;
-                        if (fields[3].length()>0) {
-                            y = Integer.parseInt(fields[3]);
-                        } else {
-                            y = 0;
-                        }
-                        if (fields[4].length()>0) {
-                            m = Integer.parseInt(fields[4]);
-                        } else {
-                            m = 0;
-                        }
-                        if (fields[5].length()>0) {
-                            d = Integer.parseInt(fields[5]);
-                        } else {
-                            d = 0;
-                        }
+                        // The following fields may be left empty to signify n/a, we assign 0 in this case
+                        int y = fields[3].length()>0 ? Integer.parseInt(fields[3]) : 0;
+                        int m = fields[4].length()>0 ? Integer.parseInt(fields[4]) : 0;
+                        int d = fields[5].length()>0 ? Integer.parseInt(fields[5]) : 0;
                         PhenoAge phenoAge = new PhenoAge(y,m,d);
                         String rule = fields[6].trim();
                         AgeRule ageRule;
@@ -85,8 +78,9 @@ public class QuestionParser {
                         } else {
                             throw new PhenolRuntimeException("Could not recognize age.rule " + line);
                         }
+                        String question = fields[7].trim();
                         AgeThresholdPhenoItem item =
-                                new AgeThresholdPhenoItem(term, ageRule, "Age when first able to walk?");
+                                new AgeThresholdPhenoItem(term, ageRule, question);
                         ageThresholdPhenoItemList.add(item);
                     }
                 }
