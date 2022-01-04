@@ -83,7 +83,7 @@ public class QuestionParserTest {
         assertEquals(AnswerType.EXCLUDED, ageRule.interpret(age17months));
         assertEquals(AnswerType.EXCLUDED, ageRule.interpret(age18months));
         assertEquals(AnswerType.OBSERVED, ageRule.interpret(age19months));
-        //assertEquals(1, ageRule.);
     }
+
 
 }
