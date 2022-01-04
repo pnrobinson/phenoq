@@ -10,10 +10,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.monarchinitiative.phenol.ontology.data.Ontology;
+import org.monarchinitiative.phenoq.phenoitem.AgeThresholdPhenoItem;
 import org.monarchinitiative.phenoq.phenoitem.PhenoItem;
 import org.monarchinitiative.phenoq.phenoitem.PhenoItemDemoGenerator;
 import org.monarchinitiative.phenoq.qtable.PhenoqTable;
 import org.monarchinitiative.phenoq.qtable.Qphenorow;
+import org.monarchinitiative.phenoq.questionnaire.DevelopmentQuestionnare;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +25,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Component
-public class Main {
+public class MainController {
 
     @FXML
     private VBox vbox;
@@ -34,7 +36,9 @@ public class Main {
 
     private Ontology ontology;
 
-    private List< Qphenorow> phenoRows = null;
+    private List<Qphenorow> phenoRows = null;
+
+    private final DevelopmentQuestionnare developmentQuestionnare;
 
     /**
      * This returns all Phenoitems with a known (Observed or excluded) answer, and ignores Phenoitems
@@ -48,8 +52,9 @@ public class Main {
     }
 
     @Autowired
-    public Main(Ontology ontology) {
+    public MainController(Ontology ontology) {
         this.ontology = ontology;
+        this.developmentQuestionnare = new DevelopmentQuestionnare(ontology);
     }
 
 
@@ -62,7 +67,8 @@ public class Main {
     @FXML
     public void startQuestionnaire() {
         VBox root = new VBox();
-        this.phenoRows = getDemoItems();
+        List<AgeThresholdPhenoItem> agePhenoItems = developmentQuestionnare.getAgeThresholdPhenoItemList();
+        this.phenoRows = agePhenoItems.stream().map(Qphenorow::new).collect(Collectors.toList());
         table = new PhenoqTable(this.phenoRows);
         root.getChildren().add(table);
         HBox buttonBox = new HBox();

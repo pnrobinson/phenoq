@@ -1,6 +1,6 @@
 package org.monarchinitiative.phenoq;
 
-import org.monarchinitiative.phenoq.controller.Main;
+import org.monarchinitiative.phenoq.controller.MainController;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +29,7 @@ public class Demo extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("Main.fxml"));
+        FXMLLoader loader = new FXMLLoader(MainController.class.getResource("Main.fxml"));
         loader.setControllerFactory(context::getBean);
         Parent parent = loader.load();
 
